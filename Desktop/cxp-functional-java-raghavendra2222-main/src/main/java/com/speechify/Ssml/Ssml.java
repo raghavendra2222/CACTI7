@@ -154,20 +154,20 @@ public class Ssml {
             List<SSMLAttribute> list = new ArrayList<>();
             while(true) {
                 skipWs();
-                if(eof()) throw new IllegalArgumentException("Attributes could not be Parsed");
-                if(ch() == '>' || startsWith("/>")) break;
+                if(eof()) throw new IllegalArgumentException("Tags could not be parsed");
+                if(ch() == '>') break;
 
                 String name = parseName();
-                if(name.isEmpty()) throw new IllegalArgumentException("Attributes could not be Parsed");
+                if(name.isEmpty()) throw new IllegalArgumentException("Attributes could not be parsed");
                 skipWs();
-                if(eof() || ch() != '=') throw new IllegalArgumentException("Attributes could not be Parsed");
+                if(eof() || ch() != '=') throw new IllegalArgumentException("Attributes could not be parsed");
                 i++;
                 skipWs();
-                if(eof() || ch() != '"') throw new IllegalArgumentException("Attributes could not be Parsed");
+                if(eof() || ch() != '"') throw new IllegalArgumentException("Attributes could not be parsed");
                 i++;
                 int start = i;
                 while(!eof() && ch() != '"') i++;
-                if(eof()) throw new IllegalArgumentException("Attributes could not be Parsed");
+                if(eof()) throw new IllegalArgumentException("Attributes could not be parsed");
                 String value = s.substring(start, i);
                 i++;
                 list.add(new SSMLAttribute(name, value));
